@@ -153,6 +153,35 @@ class ContactBook:
                 f,
             )
 
+    def command(self, command):
+        """Ejecuta un comando en la libreta de contactos."""
+
+        tipo_comando = command.split(" ")[0].lower()
+
+        match tipo_comando:
+            case "add":
+                datos = command.split(" ")[1]
+                nombre, apellido, email, tel = datos.split(";")
+
+                return self.add(nombre, apellido, email, int(tel))
+            case "del":
+                email = command.split(" ")[1]
+
+                return self.del_email(email)
+            case "find":
+                texto = command.split(" ")[1]
+
+                return self.find(texto.lower())
+            case "list":
+                if "domain=" in command:
+                    domain = command.split("domain=")[1]
+                    return self.list_contacts(domain=domain)
+                else:
+                    return self.list_contacts()
+            case _:
+                return "Comando no reconocido"
+
+
 # --- TESTS ---
 #
 # TEST 1: Add and List
