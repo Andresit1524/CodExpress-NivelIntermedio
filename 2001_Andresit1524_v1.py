@@ -88,9 +88,9 @@ class ContactBook:
         - Devuelve `None` si se elimina correctamente.
         """
 
-        for _, c in enumerate(self.contacts):
+        for i, c in enumerate(self.contacts):
             if c.email == email:
-                self.contacts.pop()
+                self.contacts.pop(i)
 
                 return None
 
